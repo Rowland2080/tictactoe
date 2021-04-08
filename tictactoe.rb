@@ -37,6 +37,10 @@ class Game
     turn_count.even?? @player1.name : @player2.name
   end
 
+  def opponent
+    turn_count.even?? @player2.name : @player1.name
+  end
+
   def turn
     if taken_positions.empty?
       puts "#{current_player} what position would you like to place your token?"
@@ -70,18 +74,10 @@ class Game
   end
 
   def player_holding_position(index)
-    if @board[index] == "X"
-      if current_player == @player1.name
-        return "You"
-      elsif current_player == @player2.name
-        return @player1.name
-      end
-    elsif @board[index] == "O"
-      if current_player == @player2.name
-        return "You"
-      elsif current_player == @player1.name
-        return @player2.name
-      end
+    if @board[index] == player_marker
+      return "You"
+    else
+      return opponent
     end
   end
 
